@@ -11,13 +11,23 @@ public class LevelManager : MonoBehaviour
 	public Transform _playerSpawn;
 	public GameObject _whaleObj;
 	public Transform _whaleSpawn;
+
+	// Can be null
+	public static LevelManager instance;
 	
 	private int _score;
 
-	private void Start()
+	private void Awake()
 	{
+		instance = this;
+
 		GameObject.Instantiate(_playerObj, _playerSpawn.position, _playerSpawn.rotation);
 		GameObject.Instantiate(_whaleObj, _whaleSpawn.position, _whaleSpawn.rotation);
+	}
+
+	private void OnDestroy()
+	{
+		instance = null;
 	}
 
 	public void AddScore(int score)
