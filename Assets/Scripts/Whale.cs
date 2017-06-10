@@ -23,4 +23,14 @@ public class Whale : MonoBehaviour
 	{
 		_rigidbody.AddForce(direction, ForceMode2D.Impulse);
 	}
+
+    public void Push(Vector2 direction)
+    {
+        _rigidbody.AddForce(direction, ForceMode2D.Force);
+    }
+
+    public Vector2 Location()
+    {
+        return this.transform.position;
+    }
 }
