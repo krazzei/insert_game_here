@@ -20,7 +20,11 @@ public class Target : MonoBehaviour
 	private void Score()
 	{
 		// TODO: death effects.
-		LevelManager.instance.AddScore(points);
+		if (LevelManager.instance != null)
+		{
+			LevelManager.instance.AddScore(points);
+		}
+		
 		Destroy(gameObject);
 	}
 }

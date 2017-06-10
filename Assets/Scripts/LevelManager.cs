@@ -5,24 +5,25 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
 	// How many whales you have for this level
-	public int _whales;
+	public int whales;
 	// The player to spawn
-	public GameObject _playerObj;
-	public Transform _playerSpawn;
-	public GameObject _whaleObj;
-	public Transform _whaleSpawn;
+	public GameObject playerObj;
+	public Transform playerSpawn;
+	public GameObject whaleObj;
+	public Transform whaleSpawn;
 
 	// Can be null
 	public static LevelManager instance;
 	
 	private int _score;
+	public int Score { get { return _score; } } 
 
 	private void Awake()
 	{
 		instance = this;
 
-		GameObject.Instantiate(_playerObj, _playerSpawn.position, _playerSpawn.rotation);
-		GameObject.Instantiate(_whaleObj, _whaleSpawn.position, _whaleSpawn.rotation);
+		GameObject.Instantiate(playerObj, playerSpawn.position, playerSpawn.rotation);
+		GameObject.Instantiate(whaleObj, whaleSpawn.position, whaleSpawn.rotation);
 	}
 
 	private void OnDestroy()
@@ -37,8 +38,8 @@ public class LevelManager : MonoBehaviour
 
 	public void RemoveWhale()
 	{
-		_whales -= 1;
-		if (_whales == 0)
+		whales -= 1;
+		if (whales == 0)
 		{
 			Debug.Log("Game Over!");
 		}
