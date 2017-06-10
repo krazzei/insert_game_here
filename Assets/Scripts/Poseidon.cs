@@ -5,9 +5,12 @@ using UnityEngine.UI;
 
 public class Poseidon : MonoBehaviour
 {
+    public float MinPower;
+    public float MaxPower;
     public GameObject GolfAngleArm;
     public GameObject GolfArrow;
     public Image PowerMeter;
+    private float _maxMinPowerDifference;
     private bool _isSwinging = false;
     private CharacterState _state;
     private Vector2 _direction;
@@ -16,6 +19,7 @@ public class Poseidon : MonoBehaviour
 
     private void Start ()
     {
+        _maxMinPowerDifference = MaxPower - MinPower;
         GolfAngleArm.SetActive(false);
         SetState(new GetDirectionState());
     }
@@ -45,9 +49,10 @@ public class Poseidon : MonoBehaviour
         GolfAngleArm.transform.rotation = direction;
     }
 
-    public void SetPower(float power)
+    public void SetPower(float powerMeterPercentage)
     {
-        _power = power;
+        _power = _maxMinPowerDifference * powerMeterPercentage;
+        PowerMeter.fillAmount = powerMeterPercentage;
     }
 
     public void ShowArrow(bool showArrow)
