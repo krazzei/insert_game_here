@@ -6,30 +6,42 @@ using UnityEngine;
 public class Beach : MonoBehaviour
 {
 	private Vector3 _orgScale;
+    private Rigidbody2D _body;
+    private Vector2 _initialVelocity;
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
-		var body = other.GetComponent<Rigidbody2D>();
-		if (body)
+        _body = other.GetComponent<Rigidbody2D>();
+		if (_body)
 		{
-			var distance = body.velocity.magnitude / 2;
-			var dir = body.velocity.normalized;
+			var distance = _body.velocity.magnitude;
+			var dir = _body.velocity.normalized;
 			var dir3 = new Vector3(dir.x, dir.y, 0);
+            _initialVelocity = _body.velocity;
+            //_body.velocity = Vector2.zero;
 
-			body.velocity = Vector2.zero;
+            _orgScale = other.transform.localScale;
 
-			_orgScale = other.transform.localScale;
-
-			iTween.MoveAdd(other.gameObject, (dir3 * distance), 2);
+			//iTween.MoveAdd(other.gameObject, (dir3 * distance), 4);
 			var hash = new Hashtable();
 			hash.Add("scale", _orgScale * 3);
-			hash.Add("time", 0.25f);
-			hash.Add("oncomplete", "ScaleDown");
+			hash.Add("time", 1f);
+			//hash.Add("oncomplete", "ScaleDown");
 			hash.Add("oncompletetarget", gameObject);
 			hash.Add("oncompleteparams", other.gameObject);
 			iTween.ScaleTo(other.gameObject, hash);
 		}
 	}
+
+    private void Update()
+    {
+        if(_body == null)
+        {
+            var subVel = new Vector2(10, 10) * Time.deltaTime;
+            _body.velocity -= Vector2.Max(_body.velocity - subVel, Vector3.zero);
+            _body.gameObject.transform.localScale = _body.velocity.magnitude / _initialVelocity.magnitude * ((_orgScale * 3) - _orgScale);
+        }
+    }
 
 	private void ScaleDown(GameObject other)
 	{
