@@ -19,11 +19,15 @@ public class LevelManager : MonoBehaviour
 	private int _score;
 	public int Score { get { return _score; } } 
 
+	private LevelState _state;
+	public LevelState State { get { return _state; } }
+
 	private void Awake()
 	{
 		instance = this;
 		GameObject.Instantiate(playerObj, playerSpawn.position, playerSpawn.rotation);
 		WhaleInstance = GameObject.Instantiate(whaleObj, whaleSpawn.position, whaleSpawn.rotation).GetComponent<Whale>();
+		_state = LevelState.Whaling;
 	}
 
 	private void OnDestroy()
@@ -38,12 +42,15 @@ public class LevelManager : MonoBehaviour
 
 	public void RemoveWhale()
 	{
-        
         whales -= 1;
 
 		if (whales == 0)
 		{
-			Debug.Log("Game Over!");
+			_state = LevelState.GameOver;
+			return;
 		}
+
+		WhaleInstance = GameObject.Instantiate(whaleObj, whaleSpawn.position, whaleSpawn.rotation).GetComponent<Whale>();
+		// TODO: move camera.
 	}
 }
