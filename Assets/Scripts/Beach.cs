@@ -16,6 +16,11 @@ public class Beach : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
+		if (_body)
+		{
+			return;
+		}
+
         _body = other.GetComponent<Rigidbody2D>();
 		if (_body)
 		{
@@ -56,6 +61,8 @@ public class Beach : MonoBehaviour
             _body.transform.localScale = currentScale;
             if(Vector3.Distance(_body.transform.position, _landPos) < 10f)
             {
+				var whale = _body.GetComponent<Whale>();
+				whale.Dead();
                 _isRolling = true;
                 iTween.ScaleTo(_body.gameObject, _orgScale, 0.2f);
             }
@@ -70,6 +77,7 @@ public class Beach : MonoBehaviour
                 _isOn = false;
 				Destroy(_body.gameObject);
                 StartCoroutine(WaitForDeath());
+				_body = null;
             }
         }
         //_body.gameObject.transform.localScale = _orgScale + _body.velocity.magnitude / _initialVelocity.magnitude * ((_orgScale * 3) - _orgScale);

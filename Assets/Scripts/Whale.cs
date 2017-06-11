@@ -85,4 +85,9 @@ public class Whale : MonoBehaviour
     {
         return this.transform.position;
     }
+
+	public void Dead()
+	{
+		_animator.SetBool("IsDead", true);
+	}
 }
