@@ -34,8 +34,8 @@ public class CameraFollow : MonoBehaviour
 		}
 	}
 
-	public void Reset()
+	public void Reset(Vector3 position)
 	{
-		_transform.position = new Vector3(0, 0, -10);
+		_transform.position = position + offset;
 	}
 }
