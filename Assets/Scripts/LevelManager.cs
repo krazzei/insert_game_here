@@ -12,7 +12,6 @@ public class LevelManager : MonoBehaviour
 	public GameObject whaleObj;
 	public Transform whaleSpawn;
     public Whale WhaleInstance;
-    public Poseidon PlayerInstance;
 
 	// Can be null
 	public static LevelManager instance;
@@ -23,7 +22,7 @@ public class LevelManager : MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
-		PlayerInstance = GameObject.Instantiate(playerObj, playerSpawn.position, playerSpawn.rotation).GetComponent<Poseidon>();
+		GameObject.Instantiate(playerObj, playerSpawn.position, playerSpawn.rotation);
 		WhaleInstance = GameObject.Instantiate(whaleObj, whaleSpawn.position, whaleSpawn.rotation).GetComponent<Whale>();
 	}
 
