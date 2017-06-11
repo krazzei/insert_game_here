@@ -55,6 +55,13 @@ public class Poseidon : MonoBehaviour
         PowerMeter.fillAmount = powerMeterPercentage;
     }
 
+    public void SwingClub()
+    {
+        var swingData = new SwingData() { Direction = _direction, Power = _power };
+        _swings.Add(swingData);
+        LevelManager.instance.WhaleInstance.Launch(_direction * _power);
+    }
+
     public void ShowArrow(bool showArrow)
     {
         GolfAngleArm.SetActive(showArrow);

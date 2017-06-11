@@ -8,8 +8,4 @@ public class SwingData
 
     public Vector2 Direction { get; set; }
 
-    public SwingData()
-    {
-        
-    }
 }

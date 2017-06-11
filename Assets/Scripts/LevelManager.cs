@@ -11,6 +11,8 @@ public class LevelManager : MonoBehaviour
 	public Transform playerSpawn;
 	public GameObject whaleObj;
 	public Transform whaleSpawn;
+    public Whale WhaleInstance;
+    public Poseidon PlayerInstance;
 
 	// Can be null
 	public static LevelManager instance;
@@ -21,9 +23,8 @@ public class LevelManager : MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
-
-		GameObject.Instantiate(playerObj, playerSpawn.position, playerSpawn.rotation);
-		GameObject.Instantiate(whaleObj, whaleSpawn.position, whaleSpawn.rotation);
+		PlayerInstance = GameObject.Instantiate(playerObj, playerSpawn.position, playerSpawn.rotation).GetComponent<Poseidon>();
+		WhaleInstance = GameObject.Instantiate(whaleObj, whaleSpawn.position, whaleSpawn.rotation).GetComponent<Whale>();
 	}
 
 	private void OnDestroy()
@@ -38,7 +39,9 @@ public class LevelManager : MonoBehaviour
 
 	public void RemoveWhale()
 	{
-		whales -= 1;
+        
+        whales -= 1;
+
 		if (whales == 0)
 		{
 			Debug.Log("Game Over!");

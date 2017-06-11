@@ -6,7 +6,7 @@ using UnityEngine;
 public class GetPowerState : CharacterState
 {
     private float _powerMeterFillAmount = 0f;
-    private float _powerMeterFillRate = 0.5f;
+    private float _powerMeterFillRate = 1f;
     private bool _meterFilling = true;
 
     public override void EnterState(Poseidon character)
@@ -21,6 +21,11 @@ public class GetPowerState : CharacterState
 
     public override void Update(Poseidon character)
     {
+        if(Input.GetKeyDown(KeyCode.Return))
+        {
+            character.SetState(new SwingClubState());
+        }
+
         if(_powerMeterFillAmount >= 1f)
         {
             _meterFilling = false;
@@ -30,7 +35,15 @@ public class GetPowerState : CharacterState
             _meterFilling = true;
         }
 
-        _powerMeterFillAmount += _powerMeterFillAmount * Time.deltaTime;
+        if(_meterFilling)
+        {
+            _powerMeterFillAmount += _powerMeterFillRate * Time.deltaTime;
+        }
+        else
+        {
+            _powerMeterFillAmount -= _powerMeterFillRate * Time.deltaTime;
+        }
+
         character.SetPower(_powerMeterFillAmount);
     }
 }
