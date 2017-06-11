@@ -20,6 +20,7 @@ public class Target : MonoBehaviour
         int randNum = Random.Range(0, People.Count);
         _spriteRenderer.sprite = People[randNum];
         DeathRemains.enabled = false;
+		points = Random.Range(50, 250);
     }
 
 	private void OnCollisionEnter2D(Collision2D collision)

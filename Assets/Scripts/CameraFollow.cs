@@ -9,11 +9,13 @@ public class CameraFollow : MonoBehaviour
 	public Vector3 offset;
 
 	private Transform _transform;
+	private float ogY;
 
 	private void Awake()
 	{
 		instance = this;
 		_transform = GetComponent<Transform>();
+		ogY = offset.y;
 	}
 
 	private void OnDestroy()
@@ -37,6 +39,7 @@ public class CameraFollow : MonoBehaviour
 
 	public void Reset(Vector3 position)
 	{
+		offset.y = ogY;
 		_transform.position = position + offset;
 	}
 }

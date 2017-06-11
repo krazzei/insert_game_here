@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour
 	public Transform whaleSpawn;
     public Whale WhaleInstance;
 	public Sprite posidonSwing;
+	public Sprite posidonTee;
 	public SpriteRenderer posidonRenderer;
 
 	// Can be null
@@ -55,6 +56,7 @@ public class LevelManager : MonoBehaviour
 
 		WhaleInstance = GameObject.Instantiate(whaleObj, whaleSpawn.position, whaleSpawn.rotation).GetComponent<Whale>();
 		CameraFollow.instance.Reset(whaleSpawn.position);
+		posidonRenderer.sprite = posidonTee;
 	}
 
 	public void SwingPosidon()

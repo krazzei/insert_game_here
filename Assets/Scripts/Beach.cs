@@ -36,9 +36,6 @@ public class Beach : MonoBehaviour
             var hash = new Hashtable();
 			hash.Add("scale", _finalScale);
 			hash.Add("time", 0.3f);
-			//hash.Add("oncomplete", "ScaleDown");
-			hash.Add("oncompletetarget", gameObject);
-			hash.Add("oncompleteparams", other.gameObject);
 			iTween.ScaleTo(other.gameObject, hash);
 		}
 	}
@@ -71,25 +68,16 @@ public class Beach : MonoBehaviour
             if(Mathf.Approximately(_body.velocity.sqrMagnitude, 0))
             {
                 _isOn = false;
+				Destroy(_body.gameObject);
                 StartCoroutine(WaitForDeath());
             }
         }
         //_body.gameObject.transform.localScale = _orgScale + _body.velocity.magnitude / _initialVelocity.magnitude * ((_orgScale * 3) - _orgScale);
     }
 
-    private void ScaleDown(GameObject other)
-	{
-		iTween.ScaleTo(other, _orgScale, 2);
-
-		// todo explode
-		Destroy(other, 3);
-
-		StartCoroutine(WaitForDeath());
-	}
-
 	private IEnumerator WaitForDeath()
 	{
-		yield return new WaitForSeconds(3.0f);
+		yield return new WaitForSeconds(0.5f);
 
 		if (LevelManager.instance != null)
 		{
