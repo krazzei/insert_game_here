@@ -30,6 +30,11 @@ public class LevelManager : MonoBehaviour
 		_state = LevelState.Whaling;
 	}
 
+	private void Start()
+	{
+		CameraFollow.instance.Reset();
+	}
+
 	private void OnDestroy()
 	{
 		instance = null;
@@ -51,6 +56,6 @@ public class LevelManager : MonoBehaviour
 		}
 
 		WhaleInstance = GameObject.Instantiate(whaleObj, whaleSpawn.position, whaleSpawn.rotation).GetComponent<Whale>();
-		// TODO: move camera.
+		CameraFollow.instance.Reset();
 	}
 }
