@@ -11,6 +11,8 @@ public class Whale : MonoBehaviour
     private float MinPower;
     [SerializeField]
     private float MaxPower;
+	[SerializeField]
+	private Sprite _roll;
 
     private float _maxMinPowerDiff;
     private ArrowRotation _hitDirectionScript;
@@ -18,6 +20,8 @@ public class Whale : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private Vector3 _direction;
     private float _power;
+	private SpriteRenderer _spriteRenderer;
+	private Animator _animator;
 
 	private void Awake()
 	{
@@ -31,6 +35,10 @@ public class Whale : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
 		_rigidbody.gravityScale = 0;
 		_rigidbody.drag = 0.15f;
+
+		_spriteRenderer = GetComponent<SpriteRenderer>();
+
+		_animator = GetComponent<Animator>();
 	}
 
 	private void Start()
@@ -57,6 +65,9 @@ public class Whale : MonoBehaviour
         Launch(_direction * _power * _maxMinPowerDiff);
 		CameraFollow.instance.Reset(transform.position);
 		CameraFollow.instance.target = GetComponent<Transform>();
+		_animator.SetBool("IsWorry", false);
+		_spriteRenderer.sprite = _roll;
+		LevelManager.instance.SwingPosidon();
     }
 
 	public void Launch(Vector2 direction)

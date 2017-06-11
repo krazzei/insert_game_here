@@ -6,12 +6,11 @@ public class LevelManager : MonoBehaviour
 {
 	// How many whales you have for this level
 	public int whales;
-	// The player to spawn
-	public GameObject playerObj;
-	public Transform playerSpawn;
 	public GameObject whaleObj;
 	public Transform whaleSpawn;
     public Whale WhaleInstance;
+	public Sprite posidonSwing;
+	public SpriteRenderer posidonRenderer;
 
 	// Can be null
 	public static LevelManager instance;
@@ -25,7 +24,6 @@ public class LevelManager : MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
-		GameObject.Instantiate(playerObj, playerSpawn.position, playerSpawn.rotation);
 		WhaleInstance = GameObject.Instantiate(whaleObj, whaleSpawn.position, whaleSpawn.rotation).GetComponent<Whale>();
 		_state = LevelState.Whaling;
 	}
@@ -57,5 +55,10 @@ public class LevelManager : MonoBehaviour
 
 		WhaleInstance = GameObject.Instantiate(whaleObj, whaleSpawn.position, whaleSpawn.rotation).GetComponent<Whale>();
 		CameraFollow.instance.Reset(whaleSpawn.position);
+	}
+
+	public void SwingPosidon()
+	{
+		posidonRenderer.sprite = posidonSwing;
 	}
 }

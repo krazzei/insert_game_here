@@ -26,9 +26,10 @@ public class CameraFollow : MonoBehaviour
 		if (target)
 		{
 			var pos = target.position;
-			if (target.position.y < _transform.position.y)
+			if (target.position.y < _transform.position.y + offset.y)
 			{
 				pos.y = _transform.position.y;
+				offset.y = 0;
 			}
 			_transform.position = pos + offset;
 		}
