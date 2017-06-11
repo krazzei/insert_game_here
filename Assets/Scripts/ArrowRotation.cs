@@ -14,7 +14,7 @@ public class ArrowRotation : MonoBehaviour
     private bool _isOn = false;
     private float _angle = 0;
     private float _angleChangeRatePerSecond = 45f;
-    private Vector3 _arrowScale = Vector3.one;
+    //private Vector3 _arrowScale = Vector3.one;
     private Vector3 _arrowScaleChangeRate = new Vector3(0.4f, 0.4f, 0.4f);
     private float _minScale = 1f;
     private float _maxScale = 1.3f;

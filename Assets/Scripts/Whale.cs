@@ -55,7 +55,7 @@ public class Whale : MonoBehaviour
         _hitDirectionScript.Hide();
         _powerMeterScript.Hide();
         Launch(_direction * _power * _maxMinPowerDiff);
-		CameraFollow.instance.Reset();
+		CameraFollow.instance.Reset(transform.position);
 		CameraFollow.instance.target = GetComponent<Transform>();
     }
 

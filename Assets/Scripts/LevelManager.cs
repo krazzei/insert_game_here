@@ -32,7 +32,7 @@ public class LevelManager : MonoBehaviour
 
 	private void Start()
 	{
-		CameraFollow.instance.Reset();
+		CameraFollow.instance.Reset(whaleSpawn.position);
 	}
 
 	private void OnDestroy()
@@ -56,6 +56,6 @@ public class LevelManager : MonoBehaviour
 		}
 
 		WhaleInstance = GameObject.Instantiate(whaleObj, whaleSpawn.position, whaleSpawn.rotation).GetComponent<Whale>();
-		CameraFollow.instance.Reset();
+		CameraFollow.instance.Reset(whaleSpawn.position);
 	}
 }
